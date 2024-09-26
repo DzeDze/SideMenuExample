@@ -51,6 +51,7 @@ class MainViewController: UIViewController {
     
     private weak var sideMenuLeadingConstraint: NSLayoutConstraint!
     private weak var contentViewLeadingConstraint: NSLayoutConstraint!
+    private weak var contentViewTrailingConstraint: NSLayoutConstraint!
     
     private var isExpanded: Bool = false
     
@@ -78,9 +79,11 @@ class MainViewController: UIViewController {
         
         //layout contentView
         contentViewLeadingConstraint = contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        contentViewTrailingConstraint = contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         NSLayoutConstraint.activate([
             contentViewLeadingConstraint,
-            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentViewTrailingConstraint,
+//            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: view.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
@@ -163,7 +166,7 @@ extension MainViewController {
             
             // Move the content view by adjusting its leading constraint
             self.contentViewLeadingConstraint.constant = targetPosition
-            
+            self.contentViewTrailingConstraint.constant = targetPosition
             // Animate dimming view's visibility
             self.dimmingView.alpha = self.isExpanded ? 1 : 0
             
